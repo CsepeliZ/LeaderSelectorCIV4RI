@@ -11,8 +11,12 @@ import java.util.List;
 public class LeaderBuild {
 
     List<Leader> leaderList = new ArrayList<>();
+    List<Trait> traitList = new ArrayList<>();
     List<String> leaderString = new ArrayList<>();
 
+    public void readTraits(String filePath) {
+        //TODO: same as readLeaders
+    }
 
     public void readLeaders(String filePath) {
 
