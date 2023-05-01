@@ -13,9 +13,31 @@ public class LeaderBuild {
     List<Leader> leaderList = new ArrayList<>();
     List<Trait> traitList = new ArrayList<>();
     List<String> leaderString = new ArrayList<>();
+    List<String> traitString = new ArrayList<>();
 
     public void readTraits(String filePath) {
-        //TODO: same as readLeaders
+
+        try {
+            traitString = Files.readAllLines(Path.of(filePath));
+            String traitName = null;
+            boolean isNegativeTrait = false;
+            String[] traitInfo = null;
+
+            for (String s : traitString) {
+                String[] sArray = s.split(";");
+                if (sArray.length > 0) {
+                    traitName = sArray[0];
+                }
+                if (sArray.length > 1) {
+                    isNegativeTrait = Boolean.parseBoolean(sArray[1]);
+                }
+            }
+            Trait nextTrait = new Trait(traitName, isNegativeTrait); //TODO: traitInfo
+            traitList.add(nextTrait);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void readLeaders(String filePath) {
@@ -42,7 +64,7 @@ public class LeaderBuild {
                 if (sArray.length > 2) {
                     leaderTraitNames = new String[]{sArray[2], sArray[3], sArray[4]};
                 }
-                //TODO: leaderTraitNames to leaderTraits
+                //TODO: leaderTraitNames to leaderTraits <<< WHY??!
             }
             Leader nextLeader = new Leader(leaderName, leaderNation, leaderTraits); //TODO: leeadeInfo
             leaderList.add(nextLeader);
