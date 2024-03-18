@@ -4,7 +4,6 @@ package main.java;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class LeaderBuild {
             traitString = Files.readAllLines(Path.of(filePath));
             String traitName = null;
             boolean isNegativeTrait = false;
-            String[] traitInfo = null;
+            String traitInfo = null;
 
             for (String s : traitString) {
                 String[] sArray = s.split(";");
@@ -31,8 +30,11 @@ public class LeaderBuild {
                 if (sArray.length > 1) {
                     isNegativeTrait = Boolean.parseBoolean(sArray[1]);
                 }
+                if (sArray.length > 2) {
+                    traitInfo = sArray[2];
+                }
             }
-            Trait nextTrait = new Trait(traitName, isNegativeTrait); //TODO: traitInfo
+            Trait nextTrait = new Trait(traitName, isNegativeTrait, traitInfo);
             traitList.add(nextTrait);
 
         } catch (IOException e) {
@@ -63,10 +65,13 @@ public class LeaderBuild {
                 }
                 if (sArray.length > 2) {
                     leaderTraitNames = new String[]{sArray[2], sArray[3], sArray[4]};
+
                 }
                 //TODO: leaderTraitNames to leaderTraits <<< WHY??!
             }
-            Leader nextLeader = new Leader(leaderName, leaderNation, leaderTraits); //TODO: leeadeInfo
+
+
+            Leader nextLeader = new Leader(leaderName, leaderNation, leaderTraits); //TODO: leeaderInfo
             leaderList.add(nextLeader);
             leaderNation = null;
             leaderTraitNames = null;

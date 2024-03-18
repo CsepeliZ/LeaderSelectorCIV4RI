@@ -12,8 +12,8 @@ public class Main {
         LeaderBuild leaderBuild = new LeaderBuild();
         List<String> filter = new ArrayList<>();
 
-        leaderBuild.readTraits("src/main/resources/traits.txt");
-        leaderBuild.readLeaders("src/main/resources/leaders.txt");
+        leaderBuild.readTraits("src/main/resources/TraitFullData.csv");
+        leaderBuild.readLeaders("src/main/resources/LeaderFullData.csv");
         leaderBuild.writeLeaders(filter);
     }
 }

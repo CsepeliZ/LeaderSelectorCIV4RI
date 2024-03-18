@@ -6,9 +6,9 @@ public class Trait {
 
     private String traitName;
     private boolean isNegativeTrait;
-    private List<String> traitInfo;
+    private String traitInfo;
 
-    public Trait(String traitName, boolean isNegativeTrait, List<String> traitInfo) {
+    public Trait(String traitName, boolean isNegativeTrait, String traitInfo) {
         this.traitName = traitName;
         this.isNegativeTrait = isNegativeTrait;
         this.traitInfo = traitInfo;
@@ -18,6 +18,7 @@ public class Trait {
         this.traitName = traitName;
         this.isNegativeTrait = isNegativeTrait;
     }
+
 
     public String getTraitName() {
         return traitName;
@@ -35,11 +36,11 @@ public class Trait {
         isNegativeTrait = negativeTrait;
     }
 
-    public List<String> getTraitInfo() {
+    public String getTraitInfo() {
         return traitInfo;
     }
 
-    public void setTraitInfo(List<String> traitInfo) {
+    public void setTraitInfo(String traitInfo) {
         this.traitInfo = traitInfo;
     }
 
