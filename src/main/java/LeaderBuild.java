@@ -77,18 +77,25 @@ public class LeaderBuild {
                 String[] sArray = s.split(";");
                 if (sArray.length > 0) {
                     leaderName = sArray[0];
+                } else {
+                    leaderName = "Name Error";
                 }
                 if (sArray.length > 1) {
                     leaderNation = sArray[1];
+                } else {
+                    leaderNation = "Nation error";
                 }
                 if (sArray.length >= 4) {
 
                     leaderTraits.add(handleLeaderTrait(sArray[2]));
                     leaderTraits.add(handleLeaderTrait(sArray[3]));
                     leaderTraits.add(handleLeaderTrait(sArray[4]));
+                } else {
+                    leaderTraits.add(handleLeaderTrait("Missing"));
+                    leaderTraits.add(handleLeaderTrait("Missing"));
+                    leaderTraits.add(handleLeaderTrait("Missing"));
                 }
             }
-
 
             Leader nextLeader = new Leader(leaderName, leaderNation, leaderTraits); //TODO: leeaderInfo
             leaderList.add(nextLeader);
@@ -97,10 +104,6 @@ public class LeaderBuild {
             e.printStackTrace();
         }
 
-        // TODO: A readLeaders metódust módosítsd úgy, hogy képes legyen beolvasni egy hibásan felvett
-        //  listát is! A különböző attribútumok feldolgozását szervezd ki külön metódusokba a könnyebb olvashatóság
-        //  kedvéért, és azokban kezeld le az esetleges kivételeket!
-        //  Ha adott sorban valamilyen adat nem értelmezhető, akkor legyenek default értékek beállítva.
     }
 
     private Trait handleLeaderTrait(String leaderTrName) {
