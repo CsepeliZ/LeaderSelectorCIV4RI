@@ -48,9 +48,10 @@ public class LeaderBuild {
     private TraitName handleTrait(String trName) {
 
         TraitName traitName = TraitName.NONE;
+        String trNameMod = trName.replace('-', '_').replace(' ', '_');
 
         try {
-            traitName = TraitName.valueOf(trName.toUpperCase());
+            traitName = TraitName.valueOf(trNameMod.toUpperCase());
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid trait: " + trName);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -105,7 +106,7 @@ public class LeaderBuild {
     private Trait handleLeaderTrait(String leaderTrName) {
 
         for (Trait leaderTr : traitList)
-            if (leaderTr.getTraitName().equals(leaderTrName.toUpperCase())) return leaderTr;
+            if (leaderTr.getTraitName().toString().equals(leaderTrName.toUpperCase())) return leaderTr;
 
         return new Trait(TraitName.NONE, true, "Trait error");  // In case of trait error
     }
