@@ -1,5 +1,7 @@
 package main.java;
 
+import main.java.trait.Trait;
+
 import java.util.List;
 
 public class Leader {

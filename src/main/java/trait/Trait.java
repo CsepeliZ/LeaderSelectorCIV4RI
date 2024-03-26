@@ -1,30 +1,30 @@
-package main.java;
+package main.java.trait;
 
 import java.util.List;
 
 public class Trait {
 
-    private String traitName;
+    private TraitName traitName;
     private boolean isNegativeTrait;
     private String traitInfo;
 
-    public Trait(String traitName, boolean isNegativeTrait, String traitInfo) {
+    public Trait(TraitName traitName, boolean isNegativeTrait, String traitInfo) {
         this.traitName = traitName;
         this.isNegativeTrait = isNegativeTrait;
         this.traitInfo = traitInfo;
     }
 
-    public Trait(String traitName, boolean isNegativeTrait) {
+    public Trait(TraitName traitName, boolean isNegativeTrait) {
         this.traitName = traitName;
         this.isNegativeTrait = isNegativeTrait;
     }
 
 
-    public String getTraitName() {
+    public TraitName getTraitName() {
         return traitName;
     }
 
-    public void setTraitName(String traitName) {
+    public void setTraitName(TraitName traitName) {
         this.traitName = traitName;
     }
 
@@ -46,7 +46,7 @@ public class Trait {
 
     @Override
     public String toString() {
-        return traitName + '\'' +
+        return traitName.getDisplayName() + '\'' +
                 "Effects: " + '\'' +
                 traitInfo;
     }

@@ -1,6 +1,9 @@
 package main.java;
 
 
+import main.java.trait.Trait;
+import main.java.trait.TraitName;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,14 +21,14 @@ public class LeaderBuild {
 
         try {
             traitString = Files.readAllLines(Path.of(filePath));
-            String traitName = null;
+            TraitName traitName = null;
             boolean isNegativeTrait = false;
             String traitInfo = null;
 
             for (String s : traitString) {
                 String[] sArray = s.split(";");
                 if (sArray.length > 0) {
-                    traitName = sArray[0];
+                    traitName = handleTrait(sArray[0]);
                 }
                 if (sArray.length > 1) {
                     isNegativeTrait = Boolean.parseBoolean(sArray[1]);
@@ -42,6 +45,20 @@ public class LeaderBuild {
         }
     }
 
+    private TraitName handleTrait(String trName) {
+
+        TraitName traitName = TraitName.NONE;
+
+        try {
+            traitName = TraitName.valueOf(trName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid trait: " + trName);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Missing trait");
+        }
+        return traitName;
+    }
+
     public void readLeaders(String filePath) {
 
         //TODO:  paraméterként kapott path String alapján olvasd be soronként a txt fájlt,
@@ -53,8 +70,8 @@ public class LeaderBuild {
             String leaderName = null;
             String leaderNation = null;
             List<Trait> leaderTraits = new ArrayList<>();
-            String[] leaderTraitNames = null;
-            //List<String> leaderInfo = null;
+
+
             for (String s : leaderString) {
                 String[] sArray = s.split(";");
                 if (sArray.length > 0) {
@@ -63,18 +80,18 @@ public class LeaderBuild {
                 if (sArray.length > 1) {
                     leaderNation = sArray[1];
                 }
-                if (sArray.length > 2) {
-                    leaderTraitNames = new String[]{sArray[2], sArray[3], sArray[4]};
+                if (sArray.length >= 4) {
 
+                    leaderTraits.add(handleLeaderTrait(sArray[2]));
+                    leaderTraits.add(handleLeaderTrait(sArray[3]));
+                    leaderTraits.add(handleLeaderTrait(sArray[4]));
                 }
-                //TODO: leaderTraitNames to leaderTraits <<< WHY??!
             }
 
 
             Leader nextLeader = new Leader(leaderName, leaderNation, leaderTraits); //TODO: leeaderInfo
             leaderList.add(nextLeader);
-            leaderNation = null;
-            leaderTraitNames = null;
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,6 +100,14 @@ public class LeaderBuild {
         //  listát is! A különböző attribútumok feldolgozását szervezd ki külön metódusokba a könnyebb olvashatóság
         //  kedvéért, és azokban kezeld le az esetleges kivételeket!
         //  Ha adott sorban valamilyen adat nem értelmezhető, akkor legyenek default értékek beállítva.
+    }
+
+    private Trait handleLeaderTrait(String leaderTrName) {
+
+        for (Trait leaderTr : traitList)
+            if (leaderTr.getTraitName().equals(leaderTrName.toUpperCase())) return leaderTr;
+
+        return new Trait(TraitName.NONE, true, "Trait error");  // In case of trait error
     }
 
     public void writeLeaders(List<String> filter) {
